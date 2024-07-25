@@ -1,11 +1,31 @@
+@tailwind utilities;
+@tailwind components;
+
+/*
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*/
 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+}
+#company-name a:visited {
+  color: white;
+}
+
+#company-name a {
+  color: white;
+}
+
+#footer a:visited {
+  color: white;
+}
+
+#footer a {
+  color: white;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,18 +36,80 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html {
+  height: 100%;
 }
+
+body {
+  border: 0;
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: rgb(var(--foreground-rgb));
+
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  min-height: 45rem;
+}
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+.diamond-narrow {
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom: 70px solid red;
+  position: relative;
+  top: -50px;
+}
+.diamond-narrow:after {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 70px;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-top: 70px solid red;
+}
+
+.pointer {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  background: blue;
+}
+.pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid white;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+.pointer:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid blue;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
 }
