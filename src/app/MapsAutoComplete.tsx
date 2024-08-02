@@ -22,11 +22,9 @@ export interface GooglePlace {
 
 export function MapsAutoComplete(props: MapsAutoCompleteProps) {
 
-    const country = 'US'; // TODO Get from user ?
-
     const {ref: materialRef} = usePlacesWidget({
         // @ts-ignore
-        apiKey: 'AIzaSyD07ghI7JVp17zPEURbCnLM7PEpVaFabIw',
+        apiKey: 'AIzaSyD07ghI7JVp17zPEURbCnLM7PEpVaFabIw', // TODO
         onPlaceSelected: props.onPlaceSelected,
         //inputAutocompleteValue: "country",
         options: {

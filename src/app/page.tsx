@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {links} from "./links";
 import Link from "next/link";
 
@@ -13,9 +13,8 @@ import {
   CardMedia,
   Grow, Divider, useTheme
 } from '@mui/material';
-
-// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
-//const withWidth = () => (WrappedComponent) => (props) => <WrappedComponent {...props} width="xs" />;
+import {MapsAutoComplete} from "@/app/MapsAutoComplete";
+import Main from "@/app/Main";
 
 
 function getBaseImageURLKey() { // TODO
@@ -52,11 +51,6 @@ function MultiActionAreaCard(props: any) {
             {props.description}
           </Typography>
         </CardContent>
-        {/*<CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-            </CardActions>*/}
       </Card>
   );
 }
@@ -100,7 +94,7 @@ function MainFeature(props: { headingLeft: boolean, heading: string, content: Re
   </Box>;
 }
 
-export default function Home(props: any){
+export default function Page() {
 
   /*componentDidMount() {
       window.addEventListener("resize", this.handleResize);
@@ -206,6 +200,10 @@ export default function Home(props: any){
   };
 
 
+  const onPlaceSelected = (place: any) => {
+    console.log('Place selected', place);
+  }
+
   return (
       <Box sx={{
         display: "flex",
@@ -220,12 +218,13 @@ export default function Home(props: any){
         <Box sx={mainHeader}>
           <Box sx={{paddingBottom: '3rem'}}>
             <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center'}}>
-              <Typography variant={"h1"} color={"white"}>
-                Social DOING.
+                <Typography variant={"h1"} color={"white"}>
+                  Less stressful travelling.
                 <Underline/>
               </Typography>
-              <Typography sx={{padding: 2}} variant={"h3"} color={"white"}>Create or join
-                challenges.</Typography>
+              <Typography sx={{padding: 2}} variant={"h3"} color={"white"}>
+                Manage itinerary, packing list and more!
+              </Typography>
               <Box sx={{padding: 3}}>
                 <Button sx={{padding: 1}} size="medium" color="secondary" variant="contained"
                         LinkComponent={Link} href={links.signup}>
@@ -234,75 +233,52 @@ export default function Home(props: any){
               </Box>
             </Box>
           </Box>
-          <Box sx={{paddingLeft: '3rem'}}>
+         {/* <Box sx={{paddingLeft: '3rem'}}>
             <img src={getBaseImageURLKey() + "/mockup-screenshot-challenge-daily-steps.png"}
                  style={{height: '300px'}} alt={"Example of a daily steps challenge"}/>
-          </Box>
+          </Box>*/}
         </Box>
 
-        {/*<Box sx={{display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'column'}}>
-                    <div>
-                        <KeyboardArrowDownIcon />
-                    </div>
-                </Box>*/}
 
-        {/* Add examples/mock up of what the UI looks like */}
 
-        {/* Add reviews from people */}
+        <Box sx={{padding: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '500px', textAlign: 'center'}}>
 
-        {/* Create a video */}
+          <Typography variant={"subtitle1"} sx={{padding: 3}}>
+            Enter an address to start planning.
+          </Typography>
 
-        {/*<Grow in={true} timeout={2000}>
-                    <Box sx={{
-                        padding: "50px 50px 50px 50px",
-                        textAlign: "center",
-                        wordBreak: 'break-word',
+          <MapsAutoComplete location={null} onPlaceSelected={onPlaceSelected} />
 
-                    }}>
-                        <Typography variant="h5" className={classes.punchline}>
-                            Tied of searching for motivational quotes? You wont find any here.
-                            You will find the ability to challenge others (or just yourself) to reach a goal in a fun way.
-                        </Typography>
-                    </Box>
-                </Grow>*/}
+          <Box sx={{textAlign: 'center'}}>
+            <Button sx={{margin: 1}} size="medium" color="primary" variant="contained">
+              Start Planning
+            </Button>
+          </Box>
 
-        {/*<MainFeature classes={classes}
-                    headingLeft={true}
-                    heading={"Join Your Friends In A Challenge."}
-                    videoURL={"/videos/collect-5-bags-of-trash-team.mp4"}
-                    content={<Typography sx={{padding: 2}}>
-                    Friendly competition: Sweat it out side-by-side in personalized challenges, from 30-day yoga
-                    to weekly step count showdowns.
-                    Cheer each other on, celebrate milestones, and commiserate over sore muscles.
-                    See your friends' progress in real-time, adding a layer of friendly competition and
-                    accountability that'll keep you pushing through.
-                    </Typography>}  />*/}
+        </Box>
 
         <MainFeature headingLeft={true}
-                     heading={"Track your progress."}
+                     heading={"Let us create a packing list for you!"}
                      videoURL={"/videos/collect-5-bags-of-trash-team.mp4"}
-                     videoTitle={"Example of a person tracking their progress on a challenge"}
+                     videoTitle={""}
                      content={<Typography sx={{padding: 2}}>
-                       No more wondering &quot;am I making progress?&quot; Our graphs paint a crystal-clear picture, keeping you motivated and accountable every step of the way.
-                       So, step into the future of goal-setting and unlock the power of data visualization.
-                       Chart your course to greatness, together!
+                       Answer the questionnaire and we will generate a packing list to use as a starting point.
                      </Typography>}  />
 
         <MainFeature headingLeft={false}
-                     heading={"Automated Progress Tracking."}
+                     heading={"Plan wha you are doing."}
                      videoURL={"/videos/automatic-progress-tracking.mp4"}
                      videoTitle={"Example of a persons steps automatically displaying on a challenge"}
                      content={<Typography sx={{padding: 2}}>
-                       Keep track of your progress automatically with some challenge types. Connect your Fitbit and automatically keep track of your steps. Do you get more steps than your friends?
+                       Create an itinerary. Plan what you are doing and when you are doing it.
                      </Typography>}  />
 
         <MainFeature headingLeft={true}
-                     heading={"Create Or Join A Team."}
+                     heading={"Create checklists for anything."}
                      videoURL={"/videos/join-team.mp4"}
                      videoTitle={"Example of a person joining a team"}
                      content={<Typography sx={{padding: 2}}>
-                       You don&apos;t always have to compete against your friends. You can join a team and compete against other teams or just be a single team where no one wins.
-                       Create a single team challenge to pick up trash in your neighborhood. The environment wins!
+                        Remember what you need to do with a to-do list, shopping list of any other kind of list.
                      </Typography>}  />
 
         <Box
@@ -563,4 +539,12 @@ export default function Home(props: any){
       </Box>
   );
 
+}
+
+Page.getLayout = function getLayout(page: any) {
+  return (
+      <Main>
+        {page}
+      </Main>
+  )
 }

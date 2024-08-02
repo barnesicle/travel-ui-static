@@ -1,18 +1,16 @@
 'use client';
 
-import theme from "@/app/theme";
-import {AppBar, Box, Button, ThemeProvider, Toolbar, Typography} from "@mui/material";
-import Link from "next/link";
-import {appName} from "@/app/app-details";
-import {links} from "@/app/links";
-import React from "react";
-import {Footer} from "@/app/Footer";
-import {Auth0Provider, useAuth0} from "@auth0/auth0-react";
+import {Auth0Provider} from "@auth0/auth0-react";
 import {getConfig} from "@/app/config";
-import { useRouter } from 'next/navigation'
-import Router from "next/router";
-import Profile from "@/app/Profile";
-import {Header} from "@/app/Header";
+import React from "react";
+
+export function Auth0Config(props: { children: React.ReactNode }) {
+    return <Auth0Provider
+        {...providerConfig()}
+    >
+        {props.children}
+    </Auth0Provider>
+}
 
 const config = getConfig();
 
@@ -44,32 +42,8 @@ const providerConfig = () => {
         clientId: config.clientId,
         onRedirectCallback,
         authorizationParams: {
-            redirect_uri: 'http://localhost:3000/login',//global.window?.location.origin,
+            redirect_uri: 'http://localhost:4000/login',//global.window?.location.origin,
             ...(config.audience ? {audience: config.audience} : null),
         },
     };
 }
-
-export default function Main(props: { children: React.ReactNode }) {
-    return <ThemeProvider theme={theme}>
-        <Auth0Provider
-            {...providerConfig()}
-        >
-        <>
-            <Header />
-
-            <main>
-                {props.children}
-            </main>
-
-            <footer>
-                <Footer />
-            </footer>
-        </>
-        </Auth0Provider>
-    </ThemeProvider>
-}
-
-
-
-

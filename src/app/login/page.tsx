@@ -19,12 +19,7 @@ type Props = {
 export default function Page (props: Props) {
 
     const {
-        user,
         isAuthenticated,
-        loginWithRedirect,
-        logout,
-        isLoading,
-        error
     } = useAuth0();
 
     useEffect(() => {

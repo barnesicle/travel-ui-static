@@ -27,9 +27,15 @@ export const Header = () => {
 
     console.log('Header', user, isAuthenticated, isLoading, error)
 
+
+    // TODO If logged in, redirect to /trips on other app.
+   /* if (isAuthenticated) {
+        return
+    }*/
+
     return <header>
 
-        <AppBar id={"header"} position="static" elevation={0}>
+        <AppBar id={"header"} position="fixed" elevation={0}  sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
                 <Box sx={{flexGrow: 1}} id={'company-name'}>
                     <Typography  variant="h6" component={Link} href={"/"} sx={{textDecoration: 'none'}}>
@@ -37,21 +43,6 @@ export const Header = () => {
                     </Typography>
                 </Box>
 
-                <Button size="small" color="secondary" variant="text" LinkComponent={Link} href={'/trips'}
-                        sx={{color: "white"}}>
-                    Trips
-                </Button>
-
-                <Button size="small" color="secondary" variant="text" LinkComponent={Link} href={'/trips/123/itinerary'}
-                        sx={{color: "white"}}>
-                    Itinerary
-                </Button>
-
-
-                <Button size="small" color="secondary" variant="text" LinkComponent={Link} href={'/trips/123/packing-list'}
-                        sx={{color: "white"}}>
-                    Packing List
-                </Button>
 
                 <Button size="small" color="secondary" variant="text" LinkComponent={Link} href={links.about}
                         sx={{color: "white"}}>
@@ -67,7 +58,7 @@ export const Header = () => {
                     <>
 
                         <Button size="small" color="secondary" variant="text"  onClick={() => {
-                            window.location.assign('http://localhost:4000/') // TODO URL config
+                            window.location.assign('http://localhost:4000/trips') // TODO URL config
                         }}
                                 sx={{color: "white"}}>
                             Other Application
